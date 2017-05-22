@@ -13,9 +13,10 @@ namespace TaskService
         [DataMember]
         public int idTask { get; set; }
         [DataMember]
-        public string textHeader { get; set; }
+        public string TaskHeader { get; set; }
         [DataMember]
-        public string text { get; set; }
+        public string TaskText { get; set; }
+        [DataMember]
+        public string Status { get; set; }
     }
-
 }

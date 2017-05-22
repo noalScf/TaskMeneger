@@ -21,6 +21,7 @@ namespace TaskService.Models
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TaskIspolnitel> TaskIspolnitels { get; set; }
         public DbSet<TaskStatu> TaskStatus { get; set; }
+        public DbSet<TaskStatusView> TaskStatusViews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -29,6 +30,7 @@ namespace TaskService.Models
             modelBuilder.Configurations.Add(new TaskMap());
             modelBuilder.Configurations.Add(new TaskIspolnitelMap());
             modelBuilder.Configurations.Add(new TaskStatuMap());
+            modelBuilder.Configurations.Add(new TaskStatusViewMap());
         }
     }
 }

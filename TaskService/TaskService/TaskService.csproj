@@ -83,11 +83,13 @@
     <Compile Include="Models\Mapping\TaskIspolnitelMap.cs" />
     <Compile Include="Models\Mapping\TaskMap.cs" />
     <Compile Include="Models\Mapping\TaskStatuMap.cs" />
+    <Compile Include="Models\Mapping\TaskStatusViewMap.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TaskIspolnitel.cs" />
     <Compile Include="Models\TaskMenegerContext.cs" />
     <Compile Include="Models\TaskStatu.cs" />
+    <Compile Include="Models\TaskStatusView.cs" />
     <Compile Include="TaskService.svc.cs">
       <DependentUpon>TaskService.svc</DependentUpon>
     </Compile>

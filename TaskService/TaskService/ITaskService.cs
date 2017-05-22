@@ -28,7 +28,7 @@ namespace TaskService
         /// <returns>List Tasks</returns>
         [OperationContract]
         [WebGet(UriTemplate = "/Tasks", ResponseFormat = WebMessageFormat.Json)]
-        IEnumerable<TaskDTO> GetTasks();
+        IEnumerable<TaskStatusView> GetTasks();
 
         /// <summary>
         /// Получение Таска по его id
@@ -37,7 +37,7 @@ namespace TaskService
         /// <returns>Конкретный таск по id</returns>
         [OperationContract]
         [WebGet(UriTemplate = "/Tasks/{idTask}", ResponseFormat = WebMessageFormat.Json)]
-        TaskDTO GetTask(string idTask);
+        TaskStatusView GetTask(string idTask);
 
         /// <summary>
         /// Добавление нового Таска
@@ -45,7 +45,7 @@ namespace TaskService
         /// <param name="addTaskDto">Новый Таск</param>
         [OperationContract]
         [WebInvoke(UriTemplate = "/AddTask", Method = "*", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        TaskDTO AddTask(TaskDTO addTaskDto);
+        TaskStatusView AddTask(TaskStatusView addTaskDto);
 
     } 
 }

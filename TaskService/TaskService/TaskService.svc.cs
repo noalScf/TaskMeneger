@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -23,61 +24,49 @@ namespace TaskService
             // Заголовки обработаются в EnableCorsMessageInspector 
         }
 
-        public IEnumerable<TaskDTO> GetTasks()
+        public IEnumerable<TaskStatusView> GetTasks()
         {
             using (var db = new TaskMenegerContext())
             {
-                List<TaskDTO> taskDtos = new List<TaskDTO>();
-                var temp = db.Tasks.ToList();
-                if (temp.Count() != 0)
-                {
-                    foreach (var t in temp)
-                    {
-                        TaskDTO taskDto = new TaskDTO();
-                        taskDto.idTask = t.idTask;
-                        taskDto.text = t.Text;
-                        taskDto.textHeader = t.TextHeader;
-                        taskDtos.Add(taskDto);
-                    }
-                    return taskDtos;
-                }
-                throw new NotImplementedException();
+                List<TaskStatusView> taskDtos = new List<TaskStatusView>();
+                return db.TaskStatusViews.ToList();
+
             }
         }
 
-        public TaskDTO GetTask(string idTask)
+        public TaskStatusView GetTask(string idTask)
         {
             using (var db = new TaskMenegerContext())
             {
-                TaskDTO taskDto = new TaskDTO();
-                var temp = db.Tasks.SingleOrDefault(t => t.idTask.ToString() == idTask);
-                if (temp != null)
-                {
-                    taskDto.idTask = temp.idTask;
-                    taskDto.text = temp.Text;
-                    taskDto.textHeader = temp.TextHeader;
-                    return taskDto;
-                }
-                throw new NotImplementedException();
+                return db.TaskStatusViews.SingleOrDefault(t => t.idTask.ToString() == idTask);
+
             }
 
         }
 
-        public TaskDTO AddTask(TaskDTO addTaskDto)
+        public TaskStatusView AddTask(TaskStatusView addTaskDto)
         {
             using (var db = new TaskMenegerContext())
             {
                 if (addTaskDto != null)
                 {
-                    Task task = new Task();
-                    task.TextHeader = addTaskDto.textHeader;
-                    task.Text = addTaskDto.text;
-
-                    db.Tasks.Add(task);
+                    var TaskStatus=new TaskStatu()
+                    {
+                        Date = DateTime.Now,
+                        idStatus = addTaskDto.idStatus,
+                        Task = new Task() {TextHeader = addTaskDto.TextHeader, Text = addTaskDto.Text},
+                        Komentarii = addTaskDto.Komentarii
+                    };
+                    db.TaskStatus.Add(TaskStatus);
                     db.SaveChanges();
-                    addTaskDto.idTask = task.idTask;
+
+                    addTaskDto.idTaskStatus = TaskStatus.idTaskStatus;
+                    addTaskDto.idTask = TaskStatus.idTask;
+                    addTaskDto.Date = TaskStatus.Date.ToLongDateString();
+                    addTaskDto.Name = db.Status.FirstOrDefault(s=>s.idStatus==addTaskDto.idStatus).Name;
                     return addTaskDto;
                 }
+
                 throw new NotImplementedException();
             }
             
