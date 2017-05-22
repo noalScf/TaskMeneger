@@ -1,106 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/css/mycss.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	
-  </head>
-  <body>
-<div id="head">
-<h1>Task meneger</h1>
-</div>
-<div id="body" class="container-fluid">
-<div id="rowbody" class="row">
-
-<div id="task" class="col col-md-8">
-
-<div id="tasks">
-    <table class="table table-striped">
-		<thead class="thead-default">
-        <tr><td style="width: 1px;"></td><td><b>Task</b></td><td><b>Options</b></td></tr>
-		</thead>
-        <tr v-for="record in task">
-            <td>
-                <p><b data-bind="text: postid"></b></p>
-
-            </td>
-            <td><p><b>{{record.textHeader}}</b></p>
-				<p>{{record.text}}</p></td>
-            <td>
-                <button class="btn btn-secondary">Edit</button>
-                <button class="btn btn-secondary">Delete</button>
-                
-            </td>
-        </tr>
-       
-    </table>
-
-
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-secondary"  data-toggle="modal" data-target="#addTaskModal">
-Add Task
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-	  <h4 class="modal-title" id="myModalLabel">Add Task</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        
-      </div>
-      <div class="modal-body">
-        <form id="modalform" class="form-horizontal">
-			<div class="form-group">
-                <label class="control-label" for="inputPost">Task</label>
-                <input type="text" v-model="taskHeader" class="form-control" id="inputTask" placeholder="Task header">
-            </div>
-			
-			<div class="form-group">
-				<label for="exampleTextarea">Task text</label>
-				<textarea v-model="taskText" class="form-control"  id="TextareaTask" rows="3" placeholder="Task text"></textarea>
+	<head>
+		<!-- Required meta tags -->
+		
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="./css/mycss.css">
+		<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+		
+		
+	</head>
+	<body>
+		<div id="head">
+			<h1>Task meneger</h1>
+		</div>
+		<div id="body" class="container-fluid">
+			<div id="rowbody" class="row">
+				
+				<div id="task" class="col col-md-9">
+					
+					<div id="tasks">
+						<table class="table table-striped">
+							<thead class="thead-default">
+								<tr><td style="width: 1px;"></td><td><b>Task</b></td><td><b>Options</b></td></tr>
+							</thead>
+							<tr v-for="record in task">
+								<td>
+									<p><b>{{record.idTask}}</b></p>
+									<span class="label label-primary">{{record.Name}}</span>
+								</td>
+								<td><div><b>{{record.TextHeader}}</b></div>
+								<div id="article" v-html="record.Text"></div></td>
+								<td class="options">
+									<button class="btn btn-primary">Edit</button>
+									<button class="btn btn-primary">Delete</button>
+									
+								</td>
+							</tr>
+							
+						</table>
+						
+						
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addTaskModal">
+							Add Task
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">>
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title">Добавить Таск</h4>
+									</div>
+									<div class="modal-body">
+										<form role="form">
+											<div class="form-group">
+												<label class="control-label" for="inputPost">Task</label>
+												<input type="text" v-model="NewTaskHeader" class="form-control" id="inputTask" placeholder="Task header">
+											</div>
+											
+											<div class="form-group">
+												<label for="exampleTextarea">Task text</label>
+												<textarea v-model="NewTaskText" class="form-control"  id="TextareaTask" rows="3" placeholder="Task text"></textarea>
+											</div>
+										</form>
+										
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" v-on:click="add" class="btn btn-primary">Save changes</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+					<div id="info" class="col-6 col-md-3">
+						
+					</div>	
+				</div>
 			</div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" v-on:click="add" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-</div>
-<div id="info" class="col-6 col-md-4">
-
-</div>	
-</div>
-</div>
-	
-
-
-	
-	
-	
-	
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/vue.js"></script>
-	<script type="text/javascript" src="js/my.js"></script> 
-	
-
-
-  </body>
-</html>
+			
+			
+			
+			
+			
+			
+			<!-- jQuery first, then Tether, then Bootstrap JS. -->
+			
+			<script src="./js/jquery-3.2.1.js"></script>
+			<script src="./bootstrap/js/bootstrap.js"></script>
+			<script src="./js/readmore.js"></script>
+			<script type="text/javascript" src="./js/vue.js"></script> 
+			<script type="text/javascript" src="./js/my.js"></script> 
+			
+	 		<script>
+				
+			</script>
+			
+		</body>
+	</html>								

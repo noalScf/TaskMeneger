@@ -1,3 +1,10 @@
 body {
 
 }
+
+#article{
+white-space: pre-wrap;
+}
+.options {
+min-width: 110pt;
+}
